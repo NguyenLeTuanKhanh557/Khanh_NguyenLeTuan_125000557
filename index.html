@@ -1,0 +1,1216 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Steam Game Store - Nền tảng phân phối game bản quyền số 1 thế giới. Khám phá hàng ngàn tựa game AAA, game Indie cùng ưu đãi giảm giá khủng tới 85%.">
+  <meta name="keywords" content="Steam, Game bản quyền, Mua game Steam, Giảm giá game, Game PC, Black Myth Wukong, Cyberpunk 2077, Elden Ring">
+  <meta name="author" content="Steam Store Frontend Team">
+  <title>Chào mừng đến với Steam | Cửa hàng Game bản quyền hàng đầu</title>
+
+  <!-- Google Fonts: Inter with Vietnamese Subsets -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Font Awesome 6 Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <!-- Animate.css Library -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+
+  <!-- AOS (Animate On Scroll) Library -->
+  <link rel="stylesheet" href="https://unpkg.com/aos@2.3.1/dist/aos.css">
+
+  <!-- Custom Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient Cursor Glow Effect -->
+  <div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
+
+  <!-- Header Section with Semantic Navigation -->
+  <header class="site-header" role="banner">
+    <!-- Utility / Global Bar -->
+    <div class="header-top-wrapper">
+      <div class="header-inner container">
+        <!-- Logo & Brand Identity -->
+        <a href="#hero-showcase" class="brand-logo" aria-label="Steam - Về trang chủ">
+          <img src="assets/steam_logo.png" alt="Steam Logo" class="brand-img animate__animated animate__pulse animate__infinite animate__slower">
+          <span class="brand-text">STEAM<span class="brand-sub">STORE</span></span>
+        </a>
+
+        <!-- Main Global Nav -->
+        <nav class="primary-nav" aria-label="Điều hướng chính">
+          <ul class="nav-list">
+            <li class="nav-item"><a href="#hero-showcase" class="nav-link active"><i class="fa-solid fa-store"></i> CỬA HÀNG</a></li>
+            <li class="nav-item"><a href="#categories" class="nav-link"><i class="fa-solid fa-gamepad"></i> DANH MỤC</a></li>
+            <li class="nav-item"><a href="#special-offers" class="nav-link"><i class="fa-solid fa-tags"></i> ĐẶC SẮC</a></li>
+            <li class="nav-item"><a href="#top-sellers" class="nav-link"><i class="fa-solid fa-trophy"></i> BÁN CHẠY</a></li>
+            <li class="nav-item"><a href="#hardware" class="nav-link"><i class="fa-solid fa-desktop"></i> THIẾT BỊ</a></li>
+            <li class="nav-item"><a href="#community" class="nav-link"><i class="fa-solid fa-users"></i> CỘNG ĐỒNG</a></li>
+          </ul>
+        </nav>
+
+        <!-- User Quick Actions & Install Steam -->
+        <div class="user-actions">
+          <a href="#install" class="btn-install animate__animated animate__fadeIn">
+            <i class="fa-brands fa-steam"></i> Cài đặt Steam
+          </a>
+          
+          <button class="action-btn" id="wishlistToggle" aria-label="Danh sách mong ước">
+            <i class="fa-solid fa-heart"></i>
+            <span class="badge" id="wishlistCount">0</span>
+          </button>
+
+          <button class="action-btn" id="cartToggle" aria-label="Giỏ hàng của bạn">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <span class="badge" id="cartCount">0</span>
+          </button>
+
+          <div class="user-profile">
+            <img src="https://avatars.steamstatic.com/fef49e7fa7e1997310d705b2a6158ff8dc1cdfeb_full.jpg" alt="Avatar người dùng" class="user-avatar" loading="lazy">
+            <span class="user-status online" title="Trực tuyến"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sub-Navbar: Category quick filters & Live Search Bar -->
+    <nav class="store-subnav" aria-label="Điều hướng nhanh cửa hàng">
+      <div class="container subnav-inner">
+        <ul class="subnav-links">
+          <li><a href="#hero-showcase" class="subnav-item active"><i class="fa-solid fa-compass"></i> Cửa Hàng Của Bạn</a></li>
+          <li><a href="#special-offers" class="subnav-item"><i class="fa-solid fa-fire text-orange"></i> Ưu Đãi Lớn</a></li>
+          <li><a href="#top-sellers" class="subnav-item"><i class="fa-solid fa-chart-line text-blue"></i> Bán Chạy Nhất</a></li>
+          <li><a href="#categories" class="subnav-item"><i class="fa-solid fa-shapes text-green"></i> Thể Loại Game</a></li>
+          <li><a href="#hardware" class="subnav-item"><i class="fa-solid fa-laptop text-cyan"></i> Steam Deck</a></li>
+        </ul>
+
+        <!-- Live Instant Search Bar -->
+        <form class="search-form" id="searchForm" role="search" onsubmit="event.preventDefault();">
+          <label for="searchInput" class="sr-only">Tìm kiếm game trên Steam</label>
+          <input type="search" id="searchInput" class="search-input" placeholder="Tìm kiếm tựa game, thể loại..." autocomplete="off">
+          <button type="submit" class="search-btn" aria-label="Thực hiện tìm kiếm">
+            <i class="fa-solid fa-magnifying-glass"></i>
+          </button>
+        </form>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Main Content Layout -->
+  <main id="main-content" class="main-content">
+    
+    <!-- SECTION 1: HERO SHOWCASE (Nổi bật & Khuyên dùng) -->
+    <section class="hero-showcase" id="hero-showcase" aria-labelledby="hero-title">
+      <div class="container">
+        <header class="section-header">
+          <h2 id="hero-title" class="section-title">
+            <i class="fa-solid fa-star text-accent animate__animated animate__rotateIn"></i> 
+            NỔI BẬT & KHUYÊN DÙNG
+          </h2>
+          <p class="section-subtitle">Các siêu phẩm bom tấn được cộng đồng game thủ bình chọn và mua nhiều nhất tuần này</p>
+        </header>
+
+        <!-- Hero Carousel Container -->
+        <div class="hero-slider" id="heroSlider" data-aos="fade-up" data-aos-duration="800">
+          <!-- Slide 1: Black Myth Wukong (Active) -->
+          <article class="hero-slide active" data-slide="0">
+            <figure class="hero-media">
+              <img src="assets/hero_wukong.jpg" alt="Black Myth: Wukong" class="hero-main-img">
+              <div class="hero-media-overlay"></div>
+              <figcaption class="sr-only">Hình ảnh quảng bá bom tấn Black Myth: Wukong</figcaption>
+            </figure>
+
+            <div class="hero-info">
+              <div class="hero-badge-row">
+                <span class="badge-status hot"><i class="fa-solid fa-fire"></i> SIÊU PHẨM 2024</span>
+                <span class="badge-platform"><i class="fa-brands fa-windows"></i> Windows</span>
+                <span class="badge-deck" title="Steam Deck Verified"><i class="fa-solid fa-check"></i> Đạt chuẩn Steam Deck</span>
+              </div>
+
+              <h3 class="hero-game-title">Black Myth: Wukong</h3>
+              <p class="hero-game-desc">
+                Hóa thân thành Thiên Mệnh Nhân, bước vào cuộc phiêu lưu huyền thoại lấy cảm hứng từ Tây Du Ký. Đồ họa Unreal Engine 5 đỉnh cao tái hiện thế giới thần thoại phương Đông sống động cùng hệ thống chiến đấu võ thuật mãn nhãn.
+              </p>
+
+              <!-- Thumbnail Gallery Preview -->
+              <div class="hero-thumbnails">
+                <img src="assets/wukong.jpg" alt="Wukong Thumbnail 1" class="active thumb-preview">
+                <img src="assets/hero_wukong.jpg" alt="Wukong Thumbnail 2" class="thumb-preview">
+                <img src="assets/eldenring.jpg" alt="Preview Game" class="thumb-preview">
+                <img src="assets/cyberpunk.jpg" alt="Preview Game" class="thumb-preview">
+              </div>
+
+              <!-- Genre Tags List -->
+              <ul class="genre-tags" aria-label="Thể loại">
+                <li class="tag">Hành Động Nhập Vai</li>
+                <li class="tag">Soulslike</li>
+                <li class="tag">Thần Thoại</li>
+                <li class="tag">Đồ Họa UE5</li>
+              </ul>
+
+              <!-- Pricing and CTA Area -->
+              <footer class="hero-action-box">
+                <div class="price-wrapper">
+                  <span class="price-status">Hiện có sẵn trên Steam</span>
+                  <span class="current-price text-highlight">1.299.000₫</span>
+                </div>
+                <div class="hero-btn-group">
+                  <button class="btn btn-wishlist" onclick="toggleWishlist('Black Myth: Wukong', '1.299.000₫', 'assets/wukong.jpg')">
+                    <i class="fa-regular fa-heart"></i> Yêu thích
+                  </button>
+                  <button class="btn btn-purchase btn-shine animate__animated animate__pulse animate__infinite animate__slow" onclick="addToCart('Black Myth: Wukong', '1.299.000₫', 'assets/wukong.jpg')">
+                    <i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ
+                  </button>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Slide 2: Cyberpunk 2077 -->
+          <article class="hero-slide" data-slide="1">
+            <figure class="hero-media">
+              <img src="assets/hero_cyberpunk.jpg" alt="Cyberpunk 2077: Phantom Liberty" class="hero-main-img">
+              <div class="hero-media-overlay"></div>
+              <figcaption class="sr-only">Hình ảnh Cyberpunk 2077: Phantom Liberty</figcaption>
+            </figure>
+
+            <div class="hero-info">
+              <div class="hero-badge-row">
+                <span class="badge-status discount"><i class="fa-solid fa-percent"></i> GIẢM 50%</span>
+                <span class="badge-platform"><i class="fa-brands fa-windows"></i> Windows</span>
+                <span class="badge-deck"><i class="fa-solid fa-check"></i> Steam Deck Verified</span>
+              </div>
+
+              <h3 class="hero-game-title">Cyberpunk 2077: Ultimate Edition</h3>
+              <p class="hero-game-desc">
+                Khám phá siêu đô thị Night City tương lai ngập tràn công nghệ và sự suy đồi. Phiên bản tối thượng đi kèm bản mở rộng ly kỳ Phantom Liberty cùng bản cập nhật Ray Tracing Overdrive tân tiến nhất.
+              </p>
+
+              <div class="hero-thumbnails">
+                <img src="assets/cyberpunk.jpg" alt="Cyberpunk Thumbnail 1" class="active thumb-preview">
+                <img src="assets/hero_cyberpunk.jpg" alt="Cyberpunk Thumbnail 2" class="thumb-preview">
+                <img src="assets/re4.jpg" alt="Preview Game" class="thumb-preview">
+                <img src="assets/rdr2.jpg" alt="Preview Game" class="thumb-preview">
+              </div>
+
+              <ul class="genre-tags" aria-label="Thể loại">
+                <li class="tag">Thế Giới Mở</li>
+                <li class="tag">Khoa Học Viễn Tưởng</li>
+                <li class="tag">Nhập Vai RPG</li>
+                <li class="tag">Ray Tracing</li>
+              </ul>
+
+              <footer class="hero-action-box">
+                <div class="price-wrapper">
+                  <div class="discount-badge">-50%</div>
+                  <div class="price-stack">
+                    <span class="original-price">990.000₫</span>
+                    <span class="current-price text-highlight">495.000₫</span>
+                  </div>
+                </div>
+                <div class="hero-btn-group">
+                  <button class="btn btn-wishlist" onclick="toggleWishlist('Cyberpunk 2077', '495.000₫', 'assets/cyberpunk.jpg')">
+                    <i class="fa-regular fa-heart"></i> Yêu thích
+                  </button>
+                  <button class="btn btn-purchase btn-shine" onclick="addToCart('Cyberpunk 2077', '495.000₫', 'assets/cyberpunk.jpg')">
+                    <i class="fa-solid fa-cart-shopping"></i> Mua ngay ưu đãi
+                  </button>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Slide 3: Elden Ring -->
+          <article class="hero-slide" data-slide="2">
+            <figure class="hero-media">
+              <img src="assets/hero_eldenring.jpg" alt="Elden Ring: Shadow of the Erdtree" class="hero-main-img">
+              <div class="hero-media-overlay"></div>
+              <figcaption class="sr-only">Hình ảnh Elden Ring</figcaption>
+            </figure>
+
+            <div class="hero-info">
+              <div class="hero-badge-row">
+                <span class="badge-status goty"><i class="fa-solid fa-trophy"></i> GAME OF THE YEAR</span>
+                <span class="badge-platform"><i class="fa-brands fa-windows"></i> Windows</span>
+                <span class="badge-deck"><i class="fa-solid fa-check"></i> Steam Deck Verified</span>
+              </div>
+
+              <h3 class="hero-game-title">Elden Ring: Shadow of the Erdtree</h3>
+              <p class="hero-game-desc">
+                Tuyệt tác nhập vai hành động từ FromSoftware và George R.R. Martin. Khám phá Vùng Đất Bóng Tối mới với hàng loạt trùm bí ẩn, vũ khí ma thuật và truyền thuyết bi tráng chưa từng hé lộ.
+              </p>
+
+              <div class="hero-thumbnails">
+                <img src="assets/eldenring.jpg" alt="Elden Ring Thumbnail" class="active thumb-preview">
+                <img src="assets/hero_eldenring.jpg" alt="Elden Ring Hero" class="thumb-preview">
+                <img src="assets/baldursgate3.jpg" alt="Preview Game" class="thumb-preview">
+                <img src="assets/godofwar.jpg" alt="Preview Game" class="thumb-preview">
+              </div>
+
+              <ul class="genre-tags" aria-label="Thể loại">
+                <li class="tag">Soulslike</li>
+                <li class="tag">Thế Giới Mở</li>
+                <li class="tag">Fantasy Tăm Tối</li>
+                <li class="tag">GOTY Winner</li>
+              </ul>
+
+              <footer class="hero-action-box">
+                <div class="price-wrapper">
+                  <span class="price-status">Game xuất sắc nhất thập kỷ</span>
+                  <span class="current-price text-highlight">1.190.000₫</span>
+                </div>
+                <div class="hero-btn-group">
+                  <button class="btn btn-wishlist" onclick="toggleWishlist('Elden Ring', '1.190.000₫', 'assets/eldenring.jpg')">
+                    <i class="fa-regular fa-heart"></i> Yêu thích
+                  </button>
+                  <button class="btn btn-purchase btn-shine" onclick="addToCart('Elden Ring', '1.190.000₫', 'assets/eldenring.jpg')">
+                    <i class="fa-solid fa-cart-shopping"></i> Thêm vào giỏ
+                  </button>
+                </div>
+              </footer>
+            </div>
+          </article>
+
+          <!-- Slider Navigation Dots & Controls -->
+          <div class="slider-controls">
+            <button class="slider-arrow prev" id="heroPrevBtn" aria-label="Slide trước"><i class="fa-solid fa-chevron-left"></i></button>
+            <div class="slider-dots" id="heroDots">
+              <button class="dot active" data-index="0" aria-label="Đến slide 1"></button>
+              <button class="dot" data-index="1" aria-label="Đến slide 2"></button>
+              <button class="dot" data-index="2" aria-label="Đến slide 3"></button>
+            </div>
+            <button class="slider-arrow next" id="heroNextBtn" aria-label="Slide tiếp theo"><i class="fa-solid fa-chevron-right"></i></button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 2: SPECIAL OFFERS (Khuyến Mãi Hot & Flash Sale) -->
+    <section class="special-offers" id="special-offers" aria-labelledby="offers-title">
+      <div class="container">
+        <header class="section-header offers-header" data-aos="fade-up">
+          <div>
+            <h2 id="offers-title" class="section-title">
+              <i class="fa-solid fa-tags text-accent"></i> 
+              ƯU ĐÃI ĐẶC BIỆT <mark class="badge-sale">GIẢM ĐẾN 67%</mark>
+            </h2>
+            <p class="section-subtitle">Chương trình Steam Weekend Deal - Khuyến mãi số lượng có hạn!</p>
+          </div>
+          <!-- Countdown Timer -->
+          <div class="deal-countdown">
+            <i class="fa-regular fa-clock text-orange"></i>
+            <span class="timer-label">Ưu đãi kết thúc sau:</span>
+            <time id="countdownDisplay" class="timer-box" datetime="P2D">47:59:59</time>
+          </div>
+        </header>
+
+        <!-- Grid of 4 Special Deals -->
+        <div class="deals-grid">
+          
+          <!-- Deal Card 1: Helldivers 2 -->
+          <article class="deal-card" data-aos="fade-up" data-aos-delay="100">
+            <figure class="card-media">
+              <img src="assets/helldivers2.jpg" alt="Helldivers 2" loading="lazy">
+              <figcaption class="sr-only">Helldivers 2 game banner</figcaption>
+              <span class="card-tag">ƯU ĐÃI CUỐI TUẦN</span>
+            </figure>
+            <div class="deal-content">
+              <h3 class="deal-title">HELLDIVERS™ 2</h3>
+              <p class="deal-subtitle">Trở thành lực lượng giải phóng ngân hà trong tựa game bắn súng Co-op 4 người nghẹt thở nhất năm.</p>
+              <div class="deal-footer">
+                <div class="discount-badge">-20%</div>
+                <div class="price-group">
+                  <span class="original-price">799.000₫</span>
+                  <span class="current-price">639.000₫</span>
+                </div>
+                <button class="btn btn-purchase btn-sm" onclick="addToCart('Helldivers 2', '639.000₫', 'assets/helldivers2.jpg')" aria-label="Mua Helldivers 2">
+                  <i class="fa-solid fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Deal Card 2: Resident Evil 4 Remake -->
+          <article class="deal-card" data-aos="fade-up" data-aos-delay="200">
+            <figure class="card-media">
+              <img src="assets/re4.jpg" alt="Resident Evil 4 Remake" loading="lazy">
+              <figcaption class="sr-only">Resident Evil 4 Remake</figcaption>
+              <span class="card-tag">CAPCOM SALE</span>
+            </figure>
+            <div class="deal-content">
+              <h3 class="deal-title">Resident Evil 4 Remake</h3>
+              <p class="deal-subtitle">Sống lại cơn ác mộng kinh điển sinh tồn kinh dị với đồ họa RE Engine chân thực đến từng chi tiết rợn người.</p>
+              <div class="deal-footer">
+                <div class="discount-badge">-50%</div>
+                <div class="price-group">
+                  <span class="original-price">990.000₫</span>
+                  <span class="current-price">495.000₫</span>
+                </div>
+                <button class="btn btn-purchase btn-sm" onclick="addToCart('Resident Evil 4 Remake', '495.000₫', 'assets/re4.jpg')" aria-label="Mua Resident Evil 4">
+                  <i class="fa-solid fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Deal Card 3: Red Dead Redemption 2 -->
+          <article class="deal-card" data-aos="fade-up" data-aos-delay="300">
+            <figure class="card-media">
+              <img src="assets/rdr2.jpg" alt="Red Dead Redemption 2" loading="lazy">
+              <figcaption class="sr-only">Red Dead Redemption 2</figcaption>
+              <span class="card-tag">ƯU ĐÃI LỚN NHẤT</span>
+            </figure>
+            <div class="deal-content">
+              <h3 class="deal-title">Red Dead Redemption 2</h3>
+              <p class="deal-subtitle">Kiệt tác thế giới mở miền viễn Tây nước Mỹ. Khám phá hành trình bi tráng của chàng cao bồi Arthur Morgan.</p>
+              <div class="deal-footer">
+                <div class="discount-badge">-67%</div>
+                <div class="price-group">
+                  <span class="original-price">1.150.000₫</span>
+                  <span class="current-price">379.500₫</span>
+                </div>
+                <button class="btn btn-purchase btn-sm" onclick="addToCart('Red Dead Redemption 2', '379.500₫', 'assets/rdr2.jpg')" aria-label="Mua RDR 2">
+                  <i class="fa-solid fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+          <!-- Deal Card 4: Hollow Knight -->
+          <article class="deal-card" data-aos="fade-up" data-aos-delay="400">
+            <figure class="card-media">
+              <img src="assets/hollowknight.jpg" alt="Hollow Knight" loading="lazy">
+              <figcaption class="sr-only">Hollow Knight</figcaption>
+              <span class="card-tag">INDIE SPOTLIGHT</span>
+            </figure>
+            <div class="deal-content">
+              <h3 class="deal-title">Hollow Knight</h3>
+              <p class="deal-subtitle">Khám phá vương quốc côn trùng Hallownest hoang tàn trong tựa game hành động 2D Metroidvania kinh điển.</p>
+              <div class="deal-footer">
+                <div class="discount-badge">-50%</div>
+                <div class="price-group">
+                  <span class="original-price">165.000₫</span>
+                  <span class="current-price">82.500₫</span>
+                </div>
+                <button class="btn btn-purchase btn-sm" onclick="addToCart('Hollow Knight', '82.500₫', 'assets/hollowknight.jpg')" aria-label="Mua Hollow Knight">
+                  <i class="fa-solid fa-cart-plus"></i>
+                </button>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 3: TOP SELLERS (Game Bán Chạy Nhất) -->
+    <section class="top-sellers" id="top-sellers" aria-labelledby="sellers-title">
+      <div class="container">
+        <header class="section-header-flex" data-aos="fade-up">
+          <div>
+            <h2 id="sellers-title" class="section-title">
+              <i class="fa-solid fa-chart-line text-accent"></i> 
+              GAME BÁN CHẠY NHẤT TRÊN STEAM
+            </h2>
+            <p class="section-subtitle">Xếp hạng dựa trên số lượng người chơi và doanh số tải xuống hàng ngày</p>
+          </div>
+
+          <!-- Category Filter Tabs -->
+          <nav class="filter-tabs" role="tablist" aria-label="Lọc danh sách game bán chạy">
+            <button role="tab" class="filter-btn active" data-filter="all" aria-selected="true">
+              <i class="fa-solid fa-border-all"></i> Tất Cả
+            </button>
+            <button role="tab" class="filter-btn" data-filter="rpg" aria-selected="false">
+              <i class="fa-solid fa-wand-magic-sparkles"></i> Nhập Vai (RPG)
+            </button>
+            <button role="tab" class="filter-btn" data-filter="action" aria-selected="false">
+              <i class="fa-solid fa-gun"></i> Hành Động
+            </button>
+            <button role="tab" class="filter-btn" data-filter="openworld" aria-selected="false">
+              <i class="fa-solid fa-earth-americas"></i> Thế Giới Mở
+            </button>
+            <button role="tab" class="filter-btn" data-filter="indie" aria-selected="false">
+              <i class="fa-solid fa-gamepad"></i> Co-op & Khác
+            </button>
+          </nav>
+        </header>
+
+        <!-- Grid of Top Sellers Articles -->
+        <div class="games-grid" id="gamesGrid">
+          
+          <!-- Game 1: Baldur's Gate 3 -->
+          <article class="game-card" data-category="rpg" data-aos="fade-up" data-aos-delay="100">
+            <figure class="card-media">
+              <img src="assets/baldursgate3.jpg" alt="Baldur's Gate 3" loading="lazy">
+              <figcaption class="sr-only">Baldur's Gate 3 game poster</figcaption>
+              <button class="wishlist-btn-card" onclick="toggleWishlist('Baldur\'s Gate 3', '990.000₫', 'assets/baldursgate3.jpg')" aria-label="Thêm vào danh sách ước">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </figure>
+
+            <div class="card-body">
+              <header class="card-header">
+                <h3 class="game-title">Baldur's Gate 3</h3>
+                <div class="review-badge positive">
+                  <i class="fa-solid fa-thumbs-up"></i> Cực kỳ tích cực (96%)
+                </div>
+              </header>
+
+              <div class="platform-icons">
+                <i class="fa-brands fa-windows" title="Windows"></i>
+                <i class="fa-brands fa-apple" title="macOS"></i>
+                <span class="deck-verified" title="Steam Deck Verified"><i class="fa-solid fa-check-circle"></i> Deck</span>
+              </div>
+
+              <ul class="genre-tags">
+                <li class="tag">Nhập Vai Sâu Sắc</li>
+                <li class="tag">Chiến Thuật Theo Lượt</li>
+                <li class="tag">Cốt Truyện Phong Phú</li>
+              </ul>
+            </div>
+
+            <footer class="card-footer">
+              <div class="price-container">
+                <span class="price-current">990.000₫</span>
+              </div>
+              <button class="btn btn-purchase btn-sm" onclick="addToCart('Baldur\'s Gate 3', '990.000₫', 'assets/baldursgate3.jpg')">
+                <i class="fa-solid fa-cart-shopping"></i> Mua ngay
+              </button>
+            </footer>
+          </article>
+
+          <!-- Game 2: Sekiro: Shadows Die Twice -->
+          <article class="game-card" data-category="action rpg" data-aos="fade-up" data-aos-delay="200">
+            <figure class="card-media">
+              <img src="assets/sekiro.jpg" alt="Sekiro Shadows Die Twice" loading="lazy">
+              <figcaption class="sr-only">Sekiro game poster</figcaption>
+              <button class="wishlist-btn-card" onclick="toggleWishlist('Sekiro: Shadows Die Twice', '645.000₫', 'assets/sekiro.jpg')" aria-label="Thêm vào danh sách ước">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </figure>
+
+            <div class="card-body">
+              <header class="card-header">
+                <h3 class="game-title">Sekiro: Shadows Die Twice</h3>
+                <div class="review-badge positive">
+                  <i class="fa-solid fa-thumbs-up"></i> Cực kỳ tích cực (95%)
+                </div>
+              </header>
+
+              <div class="platform-icons">
+                <i class="fa-brands fa-windows" title="Windows"></i>
+                <span class="deck-verified" title="Steam Deck Verified"><i class="fa-solid fa-check-circle"></i> Deck</span>
+              </div>
+
+              <ul class="genre-tags">
+                <li class="tag">Hành Động Khó</li>
+                <li class="tag">Shinobi</li>
+                <li class="tag">Soulslike</li>
+              </ul>
+            </div>
+
+            <footer class="card-footer">
+              <div class="price-container">
+                <span class="discount-badge-sm">-50%</span>
+                <span class="price-current">645.000₫</span>
+              </div>
+              <button class="btn btn-purchase btn-sm" onclick="addToCart('Sekiro: Shadows Die Twice', '645.000₫', 'assets/sekiro.jpg')">
+                <i class="fa-solid fa-cart-shopping"></i> Mua ngay
+              </button>
+            </footer>
+          </article>
+
+          <!-- Game 3: Forza Horizon 5 -->
+          <article class="game-card" data-category="openworld" data-aos="fade-up" data-aos-delay="300">
+            <figure class="card-media">
+              <img src="assets/forza5.jpg" alt="Forza Horizon 5" loading="lazy">
+              <figcaption class="sr-only">Forza Horizon 5 game poster</figcaption>
+              <button class="wishlist-btn-card" onclick="toggleWishlist('Forza Horizon 5', '645.000₫', 'assets/forza5.jpg')" aria-label="Thêm vào danh sách ước">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </figure>
+
+            <div class="card-body">
+              <header class="card-header">
+                <h3 class="game-title">Forza Horizon 5</h3>
+                <div class="review-badge positive">
+                  <i class="fa-solid fa-thumbs-up"></i> Rất tích cực (89%)
+                </div>
+              </header>
+
+              <div class="platform-icons">
+                <i class="fa-brands fa-windows" title="Windows"></i>
+                <span class="deck-verified" title="Steam Deck Playable"><i class="fa-solid fa-circle-info"></i> Deck</span>
+              </div>
+
+              <ul class="genre-tags">
+                <li class="tag">Đua Xe Thế Giới Mở</li>
+                <li class="tag">Đồ Họa Chân Thực</li>
+                <li class="tag">Multiplayer</li>
+              </ul>
+            </div>
+
+            <footer class="card-footer">
+              <div class="price-container">
+                <span class="discount-badge-sm">-50%</span>
+                <span class="price-current">645.000₫</span>
+              </div>
+              <button class="btn btn-purchase btn-sm" onclick="addToCart('Forza Horizon 5', '645.000₫', 'assets/forza5.jpg')">
+                <i class="fa-solid fa-cart-shopping"></i> Mua ngay
+              </button>
+            </footer>
+          </article>
+
+          <!-- Game 4: Palworld -->
+          <article class="game-card" data-category="openworld indie" data-aos="fade-up" data-aos-delay="400">
+            <figure class="card-media">
+              <img src="assets/palworld.jpg" alt="Palworld" loading="lazy">
+              <figcaption class="sr-only">Palworld game poster</figcaption>
+              <button class="wishlist-btn-card" onclick="toggleWishlist('Palworld', '385.000₫', 'assets/palworld.jpg')" aria-label="Thêm vào danh sách ước">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </figure>
+
+            <div class="card-body">
+              <header class="card-header">
+                <h3 class="game-title">Palworld</h3>
+                <div class="review-badge positive">
+                  <i class="fa-solid fa-thumbs-up"></i> Rất tích cực (93%)
+                </div>
+              </header>
+
+              <div class="platform-icons">
+                <i class="fa-brands fa-windows" title="Windows"></i>
+                <span class="deck-verified" title="Steam Deck Verified"><i class="fa-solid fa-check-circle"></i> Deck</span>
+              </div>
+
+              <ul class="genre-tags">
+                <li class="tag">Sinh Tồn Chế Tạo</li>
+                <li class="tag">Bắt Quái Vật</li>
+                <li class="tag">Co-op Nhiều Người</li>
+              </ul>
+            </div>
+
+            <footer class="card-footer">
+              <div class="price-container">
+                <span class="price-current">385.000₫</span>
+              </div>
+              <button class="btn btn-purchase btn-sm" onclick="addToCart('Palworld', '385.000₫', 'assets/palworld.jpg')">
+                <i class="fa-solid fa-cart-shopping"></i> Mua ngay
+              </button>
+            </footer>
+          </article>
+
+          <!-- Game 5: God of War -->
+          <article class="game-card" data-category="action" data-aos="fade-up" data-aos-delay="500">
+            <figure class="card-media">
+              <img src="assets/godofwar.jpg" alt="God of War" loading="lazy">
+              <figcaption class="sr-only">God of War game poster</figcaption>
+              <button class="wishlist-btn-card" onclick="toggleWishlist('God of War', '569.000₫', 'assets/godofwar.jpg')" aria-label="Thêm vào danh sách ước">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </figure>
+
+            <div class="card-body">
+              <header class="card-header">
+                <h3 class="game-title">God of War (2018)</h3>
+                <div class="review-badge positive">
+                  <i class="fa-solid fa-thumbs-up"></i> Cực kỳ tích cực (97%)
+                </div>
+              </header>
+
+              <div class="platform-icons">
+                <i class="fa-brands fa-windows" title="Windows"></i>
+                <span class="deck-verified" title="Steam Deck Verified"><i class="fa-solid fa-check-circle"></i> Deck</span>
+              </div>
+
+              <ul class="genre-tags">
+                <li class="tag">Hành Động Sử Thi</li>
+                <li class="tag">Thần Thoại Bắc Âu</li>
+                <li class="tag">Cốt Truyện Phụ Tử</li>
+              </ul>
+            </div>
+
+            <footer class="card-footer">
+              <div class="price-container">
+                <span class="discount-badge-sm">-50%</span>
+                <span class="price-current">569.000₫</span>
+              </div>
+              <button class="btn btn-purchase btn-sm" onclick="addToCart('God of War', '569.000₫', 'assets/godofwar.jpg')">
+                <i class="fa-solid fa-cart-shopping"></i> Mua ngay
+              </button>
+            </footer>
+          </article>
+
+          <!-- Game 6: Cyberpunk 2077 -->
+          <article class="game-card" data-category="rpg openworld" data-aos="fade-up" data-aos-delay="600">
+            <figure class="card-media">
+              <img src="assets/cyberpunk.jpg" alt="Cyberpunk 2077" loading="lazy">
+              <figcaption class="sr-only">Cyberpunk 2077 game poster</figcaption>
+              <button class="wishlist-btn-card" onclick="toggleWishlist('Cyberpunk 2077', '495.000₫', 'assets/cyberpunk.jpg')" aria-label="Thêm vào danh sách ước">
+                <i class="fa-regular fa-heart"></i>
+              </button>
+            </figure>
+
+            <div class="card-body">
+              <header class="card-header">
+                <h3 class="game-title">Cyberpunk 2077</h3>
+                <div class="review-badge positive">
+                  <i class="fa-solid fa-thumbs-up"></i> Rất tích cực (88%)
+                </div>
+              </header>
+
+              <div class="platform-icons">
+                <i class="fa-brands fa-windows" title="Windows"></i>
+                <span class="deck-verified" title="Steam Deck Verified"><i class="fa-solid fa-check-circle"></i> Deck</span>
+              </div>
+
+              <ul class="genre-tags">
+                <li class="tag">Cyberpunk</li>
+                <li class="tag">Thế Giới Mở</li>
+                <li class="tag">Sci-Fi RPG</li>
+              </ul>
+            </div>
+
+            <footer class="card-footer">
+              <div class="price-container">
+                <span class="discount-badge-sm">-50%</span>
+                <span class="price-current">495.000₫</span>
+              </div>
+              <button class="btn btn-purchase btn-sm" onclick="addToCart('Cyberpunk 2077', '495.000₫', 'assets/cyberpunk.jpg')">
+                <i class="fa-solid fa-cart-shopping"></i> Mua ngay
+              </button>
+            </footer>
+          </article>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 4: BROWSE BY CATEGORY (Khám Phá Theo Thể Loại) -->
+    <section class="browse-categories" id="categories" aria-labelledby="cat-title">
+      <div class="container">
+        <header class="section-header" data-aos="fade-up">
+          <h2 id="cat-title" class="section-title">
+            <i class="fa-solid fa-shapes text-accent"></i> 
+            DUYỆT GAME THEO THỂ LOẠI
+          </h2>
+          <p class="section-subtitle">Tìm kiếm các tác phẩm đỉnh cao phù hợp với phong cách chơi của bạn</p>
+        </header>
+
+        <!-- Categories Grid -->
+        <div class="categories-grid">
+          
+          <a href="#top-sellers" class="category-tile cat-rpg" data-aos="zoom-in" data-aos-delay="100">
+            <div class="tile-icon"><i class="fa-solid fa-dragon"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Nhập Vai (RPG)</h3>
+              <p class="tile-desc">Phiêu lưu, tùy biến và câu chuyện sử thi</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+          <a href="#top-sellers" class="category-tile cat-action" data-aos="zoom-in" data-aos-delay="150">
+            <div class="tile-icon"><i class="fa-solid fa-burst"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Hành Động & Bắn Súng</h3>
+              <p class="tile-desc">Những pha giao tranh nghẹt thở tốc độ cao</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+          <a href="#top-sellers" class="category-tile cat-openworld" data-aos="zoom-in" data-aos-delay="200">
+            <div class="tile-icon"><i class="fa-solid fa-mountain-sun"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Thế Giới Mở</h3>
+              <p class="tile-desc">Khám phá không giới hạn, tự do tuyệt đối</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+          <a href="#top-sellers" class="category-tile cat-horror" data-aos="zoom-in" data-aos-delay="250">
+            <div class="tile-icon"><i class="fa-solid fa-skull"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Kinh Dị & Sinh Tồn</h3>
+              <p class="tile-desc">Thử thách lòng can đảm trong bóng tối</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+          <a href="#top-sellers" class="category-tile cat-racing" data-aos="zoom-in" data-aos-delay="300">
+            <div class="tile-icon"><i class="fa-solid fa-car-burst"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Đua Xe & Thể Thao</h3>
+              <p class="tile-desc">Đốt cháy đường đua cùng tốc độ cực đỉnh</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+          <a href="#top-sellers" class="category-tile cat-strategy" data-aos="zoom-in" data-aos-delay="350">
+            <div class="tile-icon"><i class="fa-solid fa-chess-knight"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Chiến Thuật & Xây Dựng</h3>
+              <p class="tile-desc">Chỉ huy quân đội, kiến tạo đế chế hùng mạnh</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+          <a href="#top-sellers" class="category-tile cat-indie" data-aos="zoom-in" data-aos-delay="400">
+            <div class="tile-icon"><i class="fa-solid fa-puzzle-piece"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Indie Sáng Tạo</h3>
+              <p class="tile-desc">Độc đáo, giàu cảm xúc từ nhà phát triển độc lập</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+          <a href="#top-sellers" class="category-tile cat-coop" data-aos="zoom-in" data-aos-delay="450">
+            <div class="tile-icon"><i class="fa-solid fa-handshake-angle"></i></div>
+            <div class="tile-content">
+              <h3 class="tile-title">Co-op & Đồng Đội</h3>
+              <p class="tile-desc">Chung vai sát cánh cùng bạn bè online</p>
+            </div>
+            <div class="tile-glow"></div>
+          </a>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 5: STEAM HARDWARE SPOTLIGHT (Steam Deck OLED) -->
+    <section class="steam-deck-spotlight" id="hardware" aria-labelledby="deck-title">
+      <div class="container">
+        <div class="deck-card" data-aos="fade-up">
+          <div class="deck-info">
+            <span class="deck-tag"><i class="fa-solid fa-bolt"></i> THIẾT BỊ CHƠI GAME CẦM TAY MỚI</span>
+            <h2 id="deck-title" class="deck-title">STEAM DECK™ OLED</h2>
+            <p class="deck-desc">
+              Mang trọn vẹn thư viện game PC Steam đi bất cứ đâu. Màn hình HDR OLED rực rỡ với tần số quét 90Hz, thời lượng pin tăng thêm 50% cùng kết nối Wi-Fi 6E siêu tốc.
+            </p>
+
+            <ul class="deck-specs">
+              <li><i class="fa-solid fa-tv text-accent"></i> Màn hình 7.4" OLED 90Hz HDR</li>
+              <li><i class="fa-solid fa-battery-full text-green"></i> Pin 50Wh kéo dài tới 12 giờ</li>
+              <li><i class="fa-solid fa-wifi text-blue"></i> Wi-Fi 6E tải game siêu nhanh</li>
+              <li><i class="fa-solid fa-microchip text-orange"></i> APU AMD Zen 2/RDNA 2 mạnh mẽ</li>
+            </ul>
+
+            <div class="deck-cta-group">
+              <a href="#order-deck" class="btn btn-purchase btn-shine" onclick="event.preventDefault(); addToCart('Steam Deck OLED 512GB', '14.500.000₫', 'assets/steam_logo.png')">
+                <i class="fa-solid fa-cart-shopping"></i> Đặt mua ngay - Từ 14.500.000₫
+              </a>
+              <a href="#specs" class="btn btn-secondary">
+                <i class="fa-solid fa-circle-info"></i> Xem thông số chi tiết
+              </a>
+            </div>
+          </div>
+
+          <figure class="deck-media">
+            <img src="assets/hero_eldenring.jpg" alt="Steam Deck hiển thị game Elden Ring" class="deck-device-img">
+            <figcaption class="sr-only">Hình ảnh máy chơi game Steam Deck OLED cao cấp</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- ASIDE: COMMUNITY NEWSLETTER & STEAM STATS -->
+    <aside class="steam-community-aside" id="community" aria-label="Bản tin cộng đồng Steam">
+      <div class="container">
+        <div class="community-box" data-aos="fade-up">
+          <div class="community-stat">
+            <div class="stat-number"><span id="onlineCount">34,182,904</span></div>
+            <div class="stat-label"><i class="fa-solid fa-circle text-green pulse"></i> Người dùng đang trực tuyến</div>
+          </div>
+
+          <div class="community-stat">
+            <div class="stat-number"><span id="inGameCount">10,489,120</span></div>
+            <div class="stat-label"><i class="fa-solid fa-gamepad text-accent"></i> Người chơi đang trong game</div>
+          </div>
+
+          <div class="community-subscribe">
+            <h3 class="subscribe-title">ĐĂNG KÝ NHẬN THÔNG BÁO KHUYẾN MÃI</h3>
+            <p class="subscribe-desc">Đừng bao giờ bỏ lỡ các đợt Steam Summer Sale, Winter Sale hoặc quà tặng game miễn phí!</p>
+            <form class="subscribe-form" id="newsletterForm" onsubmit="handleSubscribe(event)">
+              <label for="subEmail" class="sr-only">Địa chỉ Email của bạn</label>
+              <input type="email" id="subEmail" required placeholder="Nhập địa chỉ email của bạn..." class="sub-input">
+              <button type="submit" class="btn btn-purchase">
+                <i class="fa-solid fa-paper-plane"></i> Đăng Ký
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Site Footer with Full Semantic Layout -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <!-- Footer Top: Logos & Notice -->
+      <div class="footer-top">
+        <div class="footer-logos">
+          <img src="assets/steam_logo.png" alt="Steam Footer Logo" class="footer-steam-logo" loading="lazy">
+          <div class="valve-text">VALVE</div>
+        </div>
+
+        <div class="footer-legal-text">
+          <p>
+            © 2026 Valve Corporation. Mọi quyền được bảo lưu. Tất cả các nhãn hiệu là tài sản của chủ sở hữu tương ứng tại Hoa Kỳ và các quốc gia khác.
+          </p>
+          <p class="vat-note">
+            Tất cả giá đã bao gồm VAT (nếu có). Thiết kế giao diện mô phỏng chuẩn Steam Dark UI phục vụ mục đích học tập và nghiên cứu kỹ thuật Front-End hiện đại.
+          </p>
+        </div>
+      </div>
+
+      <hr class="footer-divider">
+
+      <!-- Footer Columns Navigation -->
+      <div class="footer-nav-grid">
+        <div class="footer-col">
+          <h4 class="col-title"><i class="fa-brands fa-steam"></i> Về Valve & Steam</h4>
+          <ul class="col-links">
+            <li><a href="#">Giới thiệu về Valve</a></li>
+            <li><a href="#">Cơ hội nghề nghiệp</a></li>
+            <li><a href="#">Steamworks - Dành cho Nhà phát triển</a></li>
+            <li><a href="#">Phân phối trò chơi trên Steam</a></li>
+            <li><a href="#">Thẻ quà tặng Steam Digital</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="col-title"><i class="fa-solid fa-headset"></i> Trợ Giúp & Hỗ Trợ</h4>
+          <ul class="col-links">
+            <li><a href="#">Hỗ trợ khách hàng Steam</a></li>
+            <li><a href="#">Chính sách hoàn tiền trò chơi</a></li>
+            <li><a href="#">Bảo mật tài khoản & Steam Guard</a></li>
+            <li><a href="#">Tình trạng máy chủ Steam</a></li>
+            <li><a href="#">Cộng đồng hỗ trợ kỹ thuật</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="col-title"><i class="fa-solid fa-shield-halved"></i> Pháp Lý & Điều Khoản</h4>
+          <ul class="col-links">
+            <li><a href="#">Chính sách quyền riêng tư</a></li>
+            <li><a href="#">Điều khoản dịch vụ người dùng</a></li>
+            <li><a href="#">Thỏa thuận người đăng ký Steam</a></li>
+            <li><a href="#">Quy định thu hồi sản phẩm</a></li>
+            <li><a href="#">Tùy chọn Cookie</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="col-title"><i class="fa-solid fa-globe"></i> Kết Nối Cộng Đồng</h4>
+          <p class="col-desc">Theo dõi các kênh truyền thông chính thức để nhận tin tức cập nhật và giải đấu Esports.</p>
+          <div class="social-links">
+            <a href="#" aria-label="Steam Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+            <a href="#" aria-label="Steam Twitter X"><i class="fa-brands fa-x-twitter"></i></a>
+            <a href="#" aria-label="Steam Discord"><i class="fa-brands fa-discord"></i></a>
+            <a href="#" aria-label="Steam YouTube"><i class="fa-brands fa-youtube"></i></a>
+            <a href="#" aria-label="Steam Twitch"><i class="fa-brands fa-twitch"></i></a>
+          </div>
+          <div class="footer-credit">
+            <small>Senior Web Developer & Prompt Engineer • Steam Theme 2026</small>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Interactive Toast Notification Component -->
+  <div class="toast-container" id="toastContainer" aria-live="polite" aria-atomic="true"></div>
+
+  <!-- Cart Modal / Offcanvas Drawer -->
+  <dialog class="cart-modal" id="cartModal">
+    <div class="cart-modal-content">
+      <header class="cart-modal-header">
+        <h3><i class="fa-solid fa-cart-shopping text-accent"></i> Giỏ Hàng Của Bạn (<span id="cartModalCount">0</span>)</h3>
+        <button class="btn-close-modal" id="closeCartBtn" aria-label="Đóng giỏ hàng">&times;</button>
+      </header>
+      <div class="cart-items-list" id="cartItemsList">
+        <p class="empty-state">Giỏ hàng của bạn đang trống. Hãy khám phá và thêm các tựa game yêu thích nhé!</p>
+      </div>
+      <footer class="cart-modal-footer">
+        <div class="cart-total-row">
+          <span>Tổng tiền tạm tính:</span>
+          <span class="total-price" id="cartTotalPrice">0₫</span>
+        </div>
+        <button class="btn btn-purchase btn-block" onclick="checkoutCart()">
+          <i class="fa-solid fa-credit-card"></i> Tiến hành thanh toán
+        </button>
+      </footer>
+    </div>
+  </dialog>
+
+  <!-- External JavaScript Libraries -->
+  <!-- AOS Script -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+
+  <!-- Embedded Application Logic -->
+  <script>
+    // 1. Initialize AOS (Animate On Scroll)
+    document.addEventListener('DOMContentLoaded', () => {
+      AOS.init({
+        duration: 750,
+        easing: 'ease-out-cubic',
+        once: true,
+        offset: 80
+      });
+    });
+
+    // 2. Custom Ambient Cursor Glow Follower
+    const cursorGlow = document.getElementById('cursorGlow');
+    if (cursorGlow && window.matchMedia('(pointer: fine)').matches) {
+      document.addEventListener('mousemove', (e) => {
+        cursorGlow.style.left = `${e.clientX}px`;
+        cursorGlow.style.top = `${e.clientY}px`;
+      });
+    }
+
+    // 3. Hero Carousel Interactive Logic
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('#heroDots .dot');
+    let currentSlide = 0;
+    let slideInterval;
+
+    function goToSlide(index) {
+      slides[currentSlide].classList.remove('active');
+      dots[currentSlide].classList.remove('active');
+      currentSlide = (index + slides.length) % slides.length;
+      slides[currentSlide].classList.add('active');
+      dots[currentSlide].classList.add('active');
+    }
+
+    function nextSlide() {
+      goToSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      goToSlide(currentSlide - 1);
+    }
+
+    document.getElementById('heroNextBtn')?.addEventListener('click', () => {
+      nextSlide();
+      resetInterval();
+    });
+
+    document.getElementById('heroPrevBtn')?.addEventListener('click', () => {
+      prevSlide();
+      resetInterval();
+    });
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener('click', () => {
+        goToSlide(idx);
+        resetInterval();
+      });
+    });
+
+    function startInterval() {
+      slideInterval = setInterval(nextSlide, 6000);
+    }
+
+    function resetInterval() {
+      clearInterval(slideInterval);
+      startInterval();
+    }
+    startInterval();
+
+    // 4. Countdown Timer for Special Offers
+    let countdownHours = 47, countdownMinutes = 59, countdownSeconds = 59;
+    const countdownEl = document.getElementById('countdownDisplay');
+
+    function updateCountdown() {
+      if (countdownSeconds > 0) {
+        countdownSeconds--;
+      } else {
+        countdownSeconds = 59;
+        if (countdownMinutes > 0) {
+          countdownMinutes--;
+        } else {
+          countdownMinutes = 59;
+          if (countdownHours > 0) countdownHours--;
+        }
+      }
+      const pad = (n) => String(n).padStart(2, '0');
+      if (countdownEl) {
+        countdownEl.textContent = `${pad(countdownHours)}:${pad(countdownMinutes)}:${pad(countdownSeconds)}`;
+      }
+    }
+    setInterval(updateCountdown, 1000);
+
+    // 5. Category Filter in Top Sellers Grid
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const gameCards = document.querySelectorAll('.game-card');
+
+    filterButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterButtons.forEach(b => {
+          b.classList.remove('active');
+          b.setAttribute('aria-selected', 'false');
+        });
+        btn.classList.add('active');
+        btn.setAttribute('aria-selected', 'true');
+
+        const filter = btn.getAttribute('data-filter');
+
+        gameCards.forEach(card => {
+          const category = card.getAttribute('data-category') || '';
+          if (filter === 'all' || category.includes(filter)) {
+            card.style.display = 'flex';
+            card.classList.add('animate__animated', 'animate__fadeIn');
+          } else {
+            card.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    // 6. Live Search Bar Filter
+    const searchInput = document.getElementById('searchInput');
+    searchInput?.addEventListener('input', (e) => {
+      const query = e.target.value.toLowerCase().trim();
+      gameCards.forEach(card => {
+        const title = card.querySelector('.game-title')?.textContent.toLowerCase() || '';
+        const tags = Array.from(card.querySelectorAll('.tag')).map(t => t.textContent.toLowerCase()).join(' ');
+        if (title.includes(query) || tags.includes(query) || query === '') {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+
+    // 7. Shopping Cart & Wishlist System
+    let cart = [];
+    let wishlist = [];
+
+    const cartCountEl = document.getElementById('cartCount');
+    const wishlistCountEl = document.getElementById('wishlistCount');
+    const cartModal = document.getElementById('cartModal');
+    const cartToggle = document.getElementById('cartToggle');
+    const closeCartBtn = document.getElementById('closeCartBtn');
+    const cartItemsList = document.getElementById('cartItemsList');
+    const cartTotalPrice = document.getElementById('cartTotalPrice');
+    const cartModalCount = document.getElementById('cartModalCount');
+
+    function showToast(message, type = 'success') {
+      const container = document.getElementById('toastContainer');
+      const toast = document.createElement('div');
+      toast.className = `steam-toast ${type} animate__animated animate__fadeInRight`;
+      toast.innerHTML = `
+        <div class="toast-icon">
+          <i class="${type === 'success' ? 'fa-solid fa-circle-check text-green' : 'fa-solid fa-heart text-accent'}"></i>
+        </div>
+        <div class="toast-body">
+          <div class="toast-title">${type === 'success' ? 'Cửa Hàng Steam' : 'Danh Sách Ước'}</div>
+          <div class="toast-desc">${message}</div>
+        </div>
+      `;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.classList.replace('animate__fadeInRight', 'animate__fadeOutRight');
+        toast.addEventListener('animationend', () => toast.remove());
+      }, 3500);
+    }
+
+    function addToCart(title, price, image) {
+      cart.push({ title, price, image });
+      updateCartUI();
+      showToast(`Đã thêm <strong>${title}</strong> vào giỏ hàng!`, 'success');
+    }
+
+    function toggleWishlist(title, price, image) {
+      const idx = wishlist.findIndex(item => item.title === title);
+      if (idx > -1) {
+        wishlist.splice(idx, 1);
+        showToast(`Đã xóa <strong>${title}</strong> khỏi danh sách ước.`, 'info');
+      } else {
+        wishlist.push({ title, price, image });
+        showToast(`Đã thêm <strong>${title}</strong> vào danh sách ước!`, 'info');
+      }
+      wishlistCountEl.textContent = wishlist.length;
+    }
+
+    function updateCartUI() {
+      cartCountEl.textContent = cart.length;
+      cartModalCount.textContent = cart.length;
+
+      if (cart.length === 0) {
+        cartItemsList.innerHTML = '<p class="empty-state">Giỏ hàng của bạn đang trống.</p>';
+        cartTotalPrice.textContent = '0₫';
+        return;
+      }
+
+      let total = 0;
+      cartItemsList.innerHTML = '';
+      cart.forEach((item, index) => {
+        const rawPrice = parseInt(item.price.replace(/[^\d]/g, ''), 10) || 0;
+        total += rawPrice;
+
+        const itemEl = document.createElement('div');
+        itemEl.className = 'cart-item-row';
+        itemEl.innerHTML = `
+          <img src="${item.image}" alt="${item.title}" class="cart-item-thumb">
+          <div class="cart-item-info">
+            <h4>${item.title}</h4>
+            <span class="cart-item-price">${item.price}</span>
+          </div>
+          <button class="btn-remove-item" onclick="removeFromCart(${index})" title="Xóa khỏi giỏ">
+            <i class="fa-solid fa-trash-can"></i>
+          </button>
+        `;
+        cartItemsList.appendChild(itemEl);
+      });
+
+      cartTotalPrice.textContent = total.toLocaleString('vi-VN') + '₫';
+    }
+
+    function removeFromCart(index) {
+      const removed = cart.splice(index, 1);
+      updateCartUI();
+      if (removed.length > 0) {
+        showToast(`Đã bỏ <strong>${removed[0].title}</strong> khỏi giỏ.`, 'info');
+      }
+    }
+
+    cartToggle?.addEventListener('click', () => {
+      cartModal.showModal();
+    });
+
+    closeCartBtn?.addEventListener('click', () => {
+      cartModal.close();
+    });
+
+    cartModal?.addEventListener('click', (e) => {
+      if (e.target === cartModal) cartModal.close();
+    });
+
+    function checkoutCart() {
+      if (cart.length === 0) {
+        alert('Giỏ hàng của bạn đang trống!');
+        return;
+      }
+      alert(`Cảm ơn bạn! Đơn hàng gồm ${cart.length} sản phẩm trị giá ${cartTotalPrice.textContent} đã được xử lý thành công qua Steam Wallet.`);
+      cart = [];
+      updateCartUI();
+      cartModal.close();
+    }
+
+    function handleSubscribe(e) {
+      e.preventDefault();
+      const email = document.getElementById('subEmail').value;
+      if (email) {
+        showToast(`Cảm ơn! Email <strong>${email}</strong> đã đăng ký nhận tin khuyến mãi Steam thành công.`, 'success');
+        document.getElementById('newsletterForm').reset();
+      }
+    }
+  </script>
+</body>
+</html>

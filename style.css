@@ -1,0 +1,1906 @@
+/* ==========================================================================
+   STEAM GAME STORE - OFFICIAL DARK THEME STYLESHEET
+   Standard: Semantic HTML5, CSS Variables, Flexbox & CSS Grid, Responsive Design
+   Theme: Steam Signature Dark Aesthetic (Valve Corporation Style)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS VARIABLES (DESIGN SYSTEM AT :ROOT)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Steam Color Palette */
+  --steam-bg-main: #171a21;
+  --steam-bg-secondary: #1b2838;
+  --steam-bg-gradient: linear-gradient(180deg, #1b2838 0%, #171a21 100%);
+  --steam-bg-darker: #0e141b;
+  --steam-bg-overlay: rgba(14, 20, 27, 0.85);
+
+  /* Card & Surface Surfaces */
+  --steam-card-bg: #16202d;
+  --steam-card-hover: #2a475e;
+  --steam-card-inner: #0f161f;
+  --steam-card-border: #233c51;
+  --steam-card-border-hover: #66c0f4;
+
+  /* Accent & Brand Colors */
+  --steam-accent-blue: #66c0f4;
+  --steam-accent-bright: #1a9fff;
+  --steam-accent-deep: #214b6b;
+  --steam-accent-cyan: #3fc5e8;
+  --steam-accent-orange: #ff7700;
+  
+  /* Purchase & Discount Colors */
+  --steam-green-purchase: #a4d007;
+  --steam-green-dark: #5c7e10;
+  --steam-green-hover: #bbf00e;
+  --steam-green-gradient: linear-gradient(90deg, #75b022 5%, #588a1b 95%);
+  --steam-green-hover-gradient: linear-gradient(90deg, #8ed629 5%, #6aa620 95%);
+  --steam-discount-bg: #4c6b22;
+  --steam-discount-text: #a4d007;
+
+  /* Text & Contrast (Strictly High-Contrast, No dark-on-dark) */
+  --steam-text-white: #ffffff;
+  --steam-text-light: #c6d4df;
+  --steam-text-muted: #8f98a0;
+  --steam-text-accent: #66c0f4;
+
+  /* Typography */
+  --font-main: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --font-size-xs: 0.75rem;     /* 12px */
+  --font-size-sm: 0.875rem;    /* 14px */
+  --font-size-base: 1rem;      /* 16px */
+  --font-size-md: 1.125rem;    /* 18px */
+  --font-size-lg: 1.25rem;     /* 20px */
+  --font-size-xl: 1.5rem;      /* 24px */
+  --font-size-2xl: 2rem;       /* 32px */
+  --font-size-3xl: 2.5rem;     /* 40px */
+
+  /* Spacing System */
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2.25rem;
+  --spacing-2xl: 4rem;
+
+  /* Border Radii */
+  --radius-xs: 2px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 14px;
+  --radius-full: 9999px;
+
+  /* Shadows & Glows */
+  --shadow-card: 0 10px 30px rgba(0, 0, 0, 0.45);
+  --shadow-glow-blue: 0 10px 25px rgba(102, 192, 244, 0.3);
+  --shadow-glow-cyan: 0 0 20px rgba(63, 197, 232, 0.4);
+  --shadow-glow-green: 0 10px 25px rgba(164, 208, 7, 0.35);
+
+  /* Transitions */
+  --transition-fast: 0.18s cubic-bezier(0.2, 0, 0.2, 1);
+  --transition-normal: 0.3s cubic-bezier(0.2, 0, 0.2, 1);
+  --transition-smooth: 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. GLOBAL RESET & BASE STYLES
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  background-color: var(--steam-bg-main);
+  color: var(--steam-text-light);
+  font-family: var(--font-main);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  background: var(--steam-bg-gradient);
+  background-attachment: fixed;
+  line-height: 1.6;
+  overflow-x: hidden;
+  position: relative;
+}
+
+/* Accessible hidden text */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Custom Steam Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--steam-bg-darker);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #2a475e;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--steam-bg-darker);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--steam-accent-blue);
+}
+
+/* Helper Utilities */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--spacing-md);
+  padding-right: var(--spacing-md);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  background: none;
+}
+
+/* Ambient Cursor Glow Effect */
+.cursor-glow {
+  position: fixed;
+  width: 500px;
+  height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(102, 192, 244, 0.08) 0%, rgba(27, 40, 56, 0) 70%);
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  transition: transform 0.08s ease-out;
+}
+
+/* Utility Colors */
+.text-accent { color: var(--steam-accent-blue) !important; }
+.text-green { color: var(--steam-green-purchase) !important; }
+.text-blue { color: var(--steam-accent-bright) !important; }
+.text-cyan { color: var(--steam-accent-cyan) !important; }
+.text-orange { color: var(--steam-accent-orange) !important; }
+.text-highlight { color: var(--steam-text-white) !important; font-weight: 700; }
+
+/* --------------------------------------------------------------------------
+   3. HEADER & SEMANTIC NAVIGATION
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--steam-bg-main);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+  border-bottom: 1px solid rgba(102, 192, 244, 0.15);
+}
+
+.header-top-wrapper {
+  background: var(--steam-bg-main);
+  padding: 0.75rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-lg);
+}
+
+/* Brand Logo */
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.brand-img {
+  width: 44px;
+  height: 44px;
+  object-fit: contain;
+  filter: drop-shadow(0 0 10px rgba(102, 192, 244, 0.5));
+}
+
+.brand-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 2px;
+  color: var(--steam-text-white);
+  line-height: 1;
+}
+
+.brand-sub {
+  color: var(--steam-accent-blue);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  margin-left: 4px;
+  display: inline-block;
+}
+
+/* Primary Nav */
+.primary-nav .nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  color: var(--steam-text-light);
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  padding: 0.4rem 0.6rem;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all var(--transition-fast);
+}
+
+.nav-link i {
+  font-size: 0.85rem;
+  color: var(--steam-text-muted);
+  transition: color var(--transition-fast);
+}
+
+.nav-link:hover, .nav-link.active {
+  color: var(--steam-text-white);
+  background: rgba(102, 192, 244, 0.15);
+}
+
+.nav-link:hover i, .nav-link.active i {
+  color: var(--steam-accent-blue);
+}
+
+/* User Actions & Buttons */
+.user-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.btn-install {
+  background: #5c7e10;
+  background: linear-gradient(90deg, #75b022 5%, #588a1b 95%);
+  color: var(--steam-text-white);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  transition: all var(--transition-fast);
+}
+
+.btn-install:hover {
+  background: linear-gradient(90deg, #8ed629 5%, #6aa620 95%);
+  color: #ffffff;
+  box-shadow: 0 4px 14px rgba(164, 208, 7, 0.4);
+  transform: translateY(-1px);
+}
+
+.action-btn {
+  position: relative;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--steam-text-light);
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.action-btn:hover {
+  background: rgba(102, 192, 244, 0.2);
+  color: var(--steam-accent-blue);
+  border-color: var(--steam-accent-blue);
+  transform: translateY(-2px);
+}
+
+.action-btn .badge {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: var(--steam-accent-blue);
+  color: var(--steam-bg-darker);
+  font-size: 0.7rem;
+  font-weight: 800;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+.user-profile {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.user-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-xs);
+  border: 2px solid var(--steam-accent-blue);
+  cursor: pointer;
+  transition: transform var(--transition-fast);
+}
+
+.user-avatar:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 10px rgba(102, 192, 244, 0.6);
+}
+
+.user-status.online {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 10px;
+  height: 10px;
+  background: #57cbde;
+  border: 2px solid var(--steam-bg-main);
+  border-radius: 50%;
+}
+
+/* Secondary Store Subnav */
+.store-subnav {
+  background: rgba(27, 40, 56, 0.95);
+  backdrop-filter: blur(10px);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  padding: 0.5rem 0;
+}
+
+.subnav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+}
+
+.subnav-links {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  overflow-x: auto;
+}
+
+.subnav-item {
+  color: var(--steam-text-light);
+  font-size: 0.825rem;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  white-space: nowrap;
+  transition: all var(--transition-fast);
+}
+
+.subnav-item:hover, .subnav-item.active {
+  background: rgba(102, 192, 244, 0.2);
+  color: var(--steam-text-white);
+}
+
+/* Live Search Bar */
+.search-form {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 280px;
+}
+
+.search-input {
+  width: 100%;
+  background: #316282;
+  background: rgba(49, 98, 130, 0.4);
+  border: 1px solid rgba(102, 192, 244, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.45rem 2.2rem 0.45rem 0.85rem;
+  color: var(--steam-text-white);
+  font-size: 0.825rem;
+  font-family: var(--font-main);
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.search-input::placeholder {
+  color: #8da4b6;
+}
+
+.search-input:focus {
+  background: rgba(49, 98, 130, 0.7);
+  border-color: var(--steam-accent-blue);
+  box-shadow: 0 0 12px rgba(102, 192, 244, 0.35);
+}
+
+.search-btn {
+  position: absolute;
+  right: 0.6rem;
+  color: var(--steam-accent-blue);
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.search-btn:hover {
+  transform: scale(1.15);
+  color: var(--steam-text-white);
+}
+
+/* --------------------------------------------------------------------------
+   4. COMMON SECTION STYLES & HEADINGS
+   -------------------------------------------------------------------------- */
+.main-content {
+  padding-bottom: var(--spacing-2xl);
+}
+
+section {
+  padding: var(--spacing-2xl) 0;
+}
+
+.section-header {
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-header-flex {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+  margin-bottom: var(--spacing-xl);
+}
+
+.section-title {
+  color: var(--steam-text-white);
+  font-size: 1.6rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.section-subtitle {
+  color: var(--steam-text-muted);
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+/* Badges */
+.badge-sale {
+  background: var(--steam-green-purchase);
+  color: #171a21;
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-xs);
+  vertical-align: middle;
+  margin-left: 0.5rem;
+  display: inline-block;
+}
+
+/* Standard Buttons & Shine Effect */
+.btn {
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.65rem 1.25rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  transition: all var(--transition-fast);
+  text-align: center;
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn-sm {
+  padding: 0.45rem 0.9rem;
+  font-size: 0.8rem;
+}
+
+.btn-purchase {
+  background: var(--steam-green-gradient);
+  color: var(--steam-text-white);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-purchase:hover {
+  background: var(--steam-green-hover-gradient);
+  color: #ffffff;
+  box-shadow: var(--shadow-glow-green);
+  transform: translateY(-2px);
+}
+
+/* Button Shine Effect Micro-interaction */
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -60%;
+  width: 40%;
+  height: 200%;
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.35) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  transform: rotate(25deg);
+  transition: all 0.6s ease;
+}
+
+.btn-shine:hover::after {
+  left: 120%;
+}
+
+.btn-wishlist {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--steam-text-light);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.btn-wishlist:hover {
+  background: rgba(102, 192, 244, 0.2);
+  color: var(--steam-accent-blue);
+  border-color: var(--steam-accent-blue);
+}
+
+.btn-secondary {
+  background: var(--steam-card-hover);
+  color: var(--steam-text-white);
+  border: 1px solid rgba(102, 192, 244, 0.3);
+}
+
+.btn-secondary:hover {
+  background: #3a5c78;
+  border-color: var(--steam-accent-blue);
+}
+
+/* --------------------------------------------------------------------------
+   5. SECTION 1: HERO SHOWCASE (FEATURED & RECOMMENDED)
+   -------------------------------------------------------------------------- */
+.hero-showcase {
+  padding-top: var(--spacing-xl);
+}
+
+.hero-slider {
+  position: relative;
+  background: var(--steam-card-bg);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--steam-card-border);
+  overflow: hidden;
+}
+
+.hero-slide {
+  display: none;
+  grid-template-columns: 1.55fr 1fr;
+  min-height: 480px;
+}
+
+.hero-slide.active {
+  display: grid;
+  animation: heroFadeIn 0.5s ease-in-out;
+}
+
+@keyframes heroFadeIn {
+  from { opacity: 0.3; transform: scale(0.99); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.hero-media {
+  position: relative;
+  overflow: hidden;
+  background: #000;
+}
+
+.hero-main-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.hero-slide:hover .hero-main-img {
+  transform: scale(1.03);
+}
+
+.hero-media-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(22, 32, 45, 0) 70%, var(--steam-card-bg) 100%);
+  pointer-events: none;
+}
+
+.hero-info {
+  padding: 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--steam-card-bg);
+}
+
+.hero-badge-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.badge-status {
+  font-size: 0.75rem;
+  font-weight: 800;
+  padding: 0.25rem 0.6rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.badge-status.hot {
+  background: #b22222;
+  color: #fff;
+}
+
+.badge-status.discount {
+  background: var(--steam-discount-bg);
+  color: var(--steam-discount-text);
+}
+
+.badge-status.goty {
+  background: #d4af37;
+  color: #1a1a1a;
+}
+
+.badge-platform {
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-xs);
+  color: var(--steam-text-light);
+}
+
+.badge-deck {
+  background: rgba(102, 192, 244, 0.15);
+  color: var(--steam-accent-blue);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.hero-game-title {
+  color: var(--steam-text-white);
+  font-size: 1.85rem;
+  font-weight: 800;
+  line-height: 1.2;
+  margin-bottom: 0.75rem;
+}
+
+.hero-game-desc {
+  color: var(--steam-text-light);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin-bottom: 1.25rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.hero-thumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.thumb-preview {
+  width: 100%;
+  height: 54px;
+  object-fit: cover;
+  border-radius: var(--radius-xs);
+  opacity: 0.6;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.thumb-preview:hover, .thumb-preview.active {
+  opacity: 1;
+  border-color: var(--steam-accent-blue);
+  transform: scale(1.05);
+}
+
+.genre-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 1.5rem;
+}
+
+.tag {
+  background: rgba(42, 71, 94, 0.6);
+  color: var(--steam-accent-blue);
+  font-size: 0.75rem;
+  font-weight: 500;
+  padding: 0.2rem 0.55rem;
+  border-radius: var(--radius-xs);
+  border: 1px solid rgba(102, 192, 244, 0.2);
+}
+
+.hero-action-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-md);
+  padding-top: 1rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.price-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.price-status {
+  font-size: 0.75rem;
+  color: var(--steam-text-muted);
+}
+
+.current-price {
+  font-size: 1.4rem;
+  color: var(--steam-text-white);
+  font-weight: 800;
+}
+
+.original-price {
+  font-size: 0.85rem;
+  color: #738895;
+  text-decoration: line-through;
+  margin-right: 0.4rem;
+}
+
+.discount-badge {
+  background: var(--steam-discount-bg);
+  color: var(--steam-discount-text);
+  font-size: 1.3rem;
+  font-weight: 800;
+  padding: 0.2rem 0.6rem;
+  border-radius: var(--radius-xs);
+  margin-right: 0.6rem;
+}
+
+.hero-btn-group {
+  display: flex;
+  gap: 0.6rem;
+}
+
+/* Slider Controls */
+.slider-controls {
+  position: absolute;
+  bottom: 1rem;
+  left: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  z-index: 10;
+  background: rgba(14, 20, 27, 0.8);
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--radius-full);
+  backdrop-filter: blur(4px);
+}
+
+.slider-arrow {
+  color: var(--steam-text-light);
+  font-size: 0.9rem;
+  transition: color var(--transition-fast);
+}
+
+.slider-arrow:hover {
+  color: var(--steam-accent-blue);
+}
+
+.slider-dots {
+  display: flex;
+  gap: 0.4rem;
+}
+
+.slider-dots .dot {
+  width: 12px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.3);
+  border-radius: var(--radius-full);
+  transition: all var(--transition-fast);
+}
+
+.slider-dots .dot.active {
+  width: 24px;
+  background: var(--steam-accent-blue);
+  box-shadow: 0 0 8px var(--steam-accent-blue);
+}
+
+/* --------------------------------------------------------------------------
+   6. SECTION 2: SPECIAL OFFERS (ƯU ĐÃI ĐẶC BIỆT)
+   -------------------------------------------------------------------------- */
+.offers-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: var(--spacing-md);
+}
+
+.deal-countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: rgba(22, 32, 45, 0.8);
+  padding: 0.5rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 119, 0, 0.3);
+}
+
+.timer-label {
+  font-size: 0.85rem;
+  color: var(--steam-text-light);
+}
+
+.timer-box {
+  color: var(--steam-accent-orange);
+  font-family: monospace;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.deals-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.deal-card {
+  background: var(--steam-card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--steam-card-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  position: relative;
+}
+
+/* Micro-interaction: Hover Zoom & Glow */
+.deal-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--steam-card-border-hover);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.deal-card .card-media {
+  position: relative;
+  height: 155px;
+  overflow: hidden;
+}
+
+.deal-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.deal-card:hover .card-media img {
+  transform: scale(1.08);
+}
+
+.card-tag {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  background: rgba(0, 0, 0, 0.75);
+  color: var(--steam-accent-blue);
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-xs);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(102, 192, 244, 0.3);
+}
+
+.deal-content {
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  justify-content: space-between;
+}
+
+.deal-title {
+  color: var(--steam-text-white);
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.deal-subtitle {
+  color: var(--steam-text-muted);
+  font-size: 0.8rem;
+  line-height: 1.4;
+  margin-bottom: 1rem;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.deal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.5rem 0.6rem;
+  border-radius: var(--radius-xs);
+}
+
+.price-group {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.deal-footer .original-price {
+  font-size: 0.75rem;
+  margin-right: 0;
+}
+
+.deal-footer .current-price {
+  font-size: 0.95rem;
+  color: var(--steam-green-purchase);
+}
+
+/* --------------------------------------------------------------------------
+   7. SECTION 3: TOP SELLERS (GAME BÁN CHẠY NHẤT)
+   -------------------------------------------------------------------------- */
+.filter-tabs {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--steam-text-light);
+  font-size: 0.825rem;
+  font-weight: 600;
+  padding: 0.45rem 0.85rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: all var(--transition-fast);
+}
+
+.filter-btn:hover, .filter-btn.active {
+  background: var(--steam-accent-deep);
+  color: var(--steam-text-white);
+  border-color: var(--steam-accent-blue);
+  box-shadow: 0 0 10px rgba(102, 192, 244, 0.25);
+}
+
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.game-card {
+  background: var(--steam-card-bg);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--steam-card-border);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-card);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  position: relative;
+}
+
+/* Micro-interaction: Hover Zoom & Glow */
+.game-card:hover {
+  transform: translateY(-6px) scale(1.02);
+  border-color: var(--steam-accent-blue);
+  box-shadow: var(--shadow-glow-blue);
+}
+
+.game-card .card-media {
+  position: relative;
+  height: 170px;
+  overflow: hidden;
+  background: #000;
+}
+
+.game-card .card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.game-card:hover .card-media img {
+  transform: scale(1.08);
+}
+
+.wishlist-btn-card {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.65);
+  color: var(--steam-text-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  backdrop-filter: blur(4px);
+  transition: all var(--transition-fast);
+}
+
+.wishlist-btn-card:hover {
+  background: var(--steam-accent-blue);
+  color: var(--steam-bg-darker);
+  transform: scale(1.15);
+}
+
+.card-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card-header {
+  margin-bottom: 0.75rem;
+}
+
+.game-title {
+  color: var(--steam-text-white);
+  font-size: 1.15rem;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 0.35rem;
+}
+
+.review-badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.review-badge.positive {
+  color: var(--steam-accent-blue);
+}
+
+.platform-icons {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--steam-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 0.85rem;
+}
+
+.platform-icons i:hover {
+  color: var(--steam-text-white);
+}
+
+.deck-verified {
+  font-size: 0.75rem;
+  color: var(--steam-accent-blue);
+  background: rgba(102, 192, 244, 0.12);
+  padding: 0.1rem 0.4rem;
+  border-radius: var(--radius-xs);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.card-footer {
+  padding: 0.85rem 1.25rem;
+  background: rgba(14, 20, 27, 0.4);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.price-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.discount-badge-sm {
+  background: var(--steam-discount-bg);
+  color: var(--steam-discount-text);
+  font-size: 0.85rem;
+  font-weight: 800;
+  padding: 0.15rem 0.4rem;
+  border-radius: var(--radius-xs);
+}
+
+.price-current {
+  color: var(--steam-text-white);
+  font-weight: 700;
+  font-size: 1.05rem;
+}
+
+/* --------------------------------------------------------------------------
+   8. SECTION 4: BROWSE BY CATEGORY (THỂ LOẠI GAME)
+   -------------------------------------------------------------------------- */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+
+.category-tile {
+  position: relative;
+  height: 140px;
+  padding: 1.5rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+  background: #1e2837;
+}
+
+.category-tile:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: var(--shadow-glow-blue);
+  border-color: var(--steam-accent-blue);
+}
+
+/* Gradients for Category Tiles */
+.cat-rpg { background: linear-gradient(135deg, #1f3b58 0%, #0d1e31 100%); }
+.cat-action { background: linear-gradient(135deg, #5c2020 0%, #290d0d 100%); }
+.cat-openworld { background: linear-gradient(135deg, #1b4931 0%, #0c2619 100%); }
+.cat-horror { background: linear-gradient(135deg, #3d1b49 0%, #1e0b24 100%); }
+.cat-racing { background: linear-gradient(135deg, #53451b 0%, #2b220b 100%); }
+.cat-strategy { background: linear-gradient(135deg, #1b3d49 0%, #0c2026 100%); }
+.cat-indie { background: linear-gradient(135deg, #491b3e 0%, #280a22 100%); }
+.cat-coop { background: linear-gradient(135deg, #2a2e58 0%, #12152e 100%); }
+
+.tile-icon {
+  font-size: 2.2rem;
+  color: var(--steam-accent-blue);
+  margin-bottom: auto;
+  opacity: 0.85;
+  transition: transform var(--transition-normal), opacity var(--transition-normal);
+}
+
+.category-tile:hover .tile-icon {
+  transform: scale(1.15) translateY(-2px);
+  opacity: 1;
+  color: #fff;
+}
+
+.tile-title {
+  color: var(--steam-text-white);
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.tile-desc {
+  color: var(--steam-text-muted);
+  font-size: 0.75rem;
+  margin-top: 0.2rem;
+}
+
+.tile-glow {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top right, rgba(102, 192, 244, 0.15), transparent 70%);
+  pointer-events: none;
+}
+
+/* --------------------------------------------------------------------------
+   9. SECTION 5: STEAM HARDWARE SPOTLIGHT (STEAM DECK OLED)
+   -------------------------------------------------------------------------- */
+.deck-card {
+  background: linear-gradient(135deg, #1b2838 0%, #111a24 100%);
+  border: 1px solid var(--steam-card-border);
+  border-radius: var(--radius-lg);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  position: relative;
+}
+
+.deck-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--steam-accent-blue);
+}
+
+.deck-info {
+  padding: 3rem;
+}
+
+.deck-tag {
+  color: var(--steam-accent-orange);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 1px;
+  display: inline-block;
+  margin-bottom: 0.75rem;
+}
+
+.deck-title {
+  color: var(--steam-text-white);
+  font-size: 2.25rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  margin-bottom: 1rem;
+}
+
+.deck-desc {
+  color: var(--steam-text-light);
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+
+.deck-specs {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+  margin-bottom: 2rem;
+}
+
+.deck-specs li {
+  font-size: 0.85rem;
+  color: var(--steam-text-light);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.deck-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.deck-media {
+  height: 100%;
+  min-height: 380px;
+  position: relative;
+  overflow: hidden;
+}
+
+.deck-device-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-smooth);
+}
+
+.deck-card:hover .deck-device-img {
+  transform: scale(1.05);
+}
+
+/* --------------------------------------------------------------------------
+   10. ASIDE: COMMUNITY NEWSLETTER & STATS
+   -------------------------------------------------------------------------- */
+.steam-community-aside {
+  padding: 1rem 0;
+}
+
+.community-box {
+  background: rgba(22, 32, 45, 0.75);
+  border: 1px solid var(--steam-card-border);
+  border-radius: var(--radius-md);
+  padding: 2.25rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1.8fr;
+  align-items: center;
+  gap: 2rem;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 900;
+  color: var(--steam-text-white);
+  letter-spacing: 1px;
+}
+
+.stat-label {
+  font-size: 0.85rem;
+  color: var(--steam-text-muted);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  margin-top: 0.2rem;
+}
+
+.pulse {
+  animation: pulseDot 2s infinite;
+}
+
+@keyframes pulseDot {
+  0% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.85); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.subscribe-title {
+  color: var(--steam-text-white);
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin-bottom: 0.35rem;
+}
+
+.subscribe-desc {
+  font-size: 0.8rem;
+  color: var(--steam-text-muted);
+  margin-bottom: 0.75rem;
+}
+
+.subscribe-form {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.sub-input {
+  flex-grow: 1;
+  background: rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(102, 192, 244, 0.25);
+  border-radius: var(--radius-xs);
+  padding: 0.6rem 0.9rem;
+  color: var(--steam-text-white);
+  font-family: var(--font-main);
+  font-size: 0.85rem;
+  outline: none;
+  transition: all var(--transition-fast);
+}
+
+.sub-input:focus {
+  border-color: var(--steam-accent-blue);
+  box-shadow: 0 0 10px rgba(102, 192, 244, 0.3);
+}
+
+/* --------------------------------------------------------------------------
+   11. FOOTER (VALVE & STEAM COMPLIANCE)
+   -------------------------------------------------------------------------- */
+.site-footer {
+  background: #11141a;
+  border-top: 2px solid #233c51;
+  padding: 3rem 0 2rem;
+  color: var(--steam-text-muted);
+  font-size: 0.825rem;
+}
+
+.footer-top {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-logos {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.footer-steam-logo {
+  height: 38px;
+  width: auto;
+  opacity: 0.8;
+}
+
+.valve-text {
+  font-size: 1.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #c6d4df;
+  border-left: 2px solid rgba(255, 255, 255, 0.15);
+  padding-left: 1.25rem;
+}
+
+.footer-legal-text {
+  line-height: 1.5;
+}
+
+.vat-note {
+  margin-top: 0.35rem;
+  color: #626d78;
+  font-size: 0.75rem;
+}
+
+.footer-divider {
+  border: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.08);
+  margin-bottom: 2.25rem;
+}
+
+.footer-nav-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+.col-title {
+  color: var(--steam-text-white);
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.col-links li {
+  margin-bottom: 0.5rem;
+}
+
+.col-links a {
+  color: var(--steam-text-light);
+  transition: color var(--transition-fast);
+}
+
+.col-links a:hover {
+  color: var(--steam-accent-blue);
+}
+
+.col-desc {
+  line-height: 1.5;
+  margin-bottom: 1rem;
+}
+
+.social-links {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.social-links a {
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.06);
+  color: var(--steam-text-light);
+  border-radius: var(--radius-xs);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.95rem;
+  transition: all var(--transition-fast);
+}
+
+.social-links a:hover {
+  background: var(--steam-accent-blue);
+  color: var(--steam-bg-darker);
+  transform: translateY(-2px);
+}
+
+.footer-credit {
+  color: #556270;
+  font-size: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   12. TOAST NOTIFICATION & CART MODAL
+   -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  z-index: 10000;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  pointer-events: none;
+}
+
+.steam-toast {
+  background: #1e2d3e;
+  border-left: 4px solid var(--steam-green-purchase);
+  border-radius: var(--radius-sm);
+  padding: 0.9rem 1.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  min-width: 300px;
+  max-width: 420px;
+  pointer-events: auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.steam-toast.info {
+  border-left-color: var(--steam-accent-blue);
+}
+
+.toast-icon {
+  font-size: 1.3rem;
+}
+
+.toast-title {
+  color: var(--steam-text-white);
+  font-size: 0.85rem;
+  font-weight: 700;
+}
+
+.toast-desc {
+  color: var(--steam-text-light);
+  font-size: 0.8rem;
+  line-height: 1.3;
+}
+
+/* Modal Dialog */
+.cart-modal {
+  margin: auto;
+  background: transparent;
+  border: none;
+  padding: 0;
+  max-width: 520px;
+  width: 90%;
+  border-radius: var(--radius-md);
+  outline: none;
+}
+
+.cart-modal::backdrop {
+  background: rgba(0, 0, 0, 0.75);
+  backdrop-filter: blur(5px);
+}
+
+.cart-modal-content {
+  background: var(--steam-card-bg);
+  border: 1px solid var(--steam-card-border);
+  border-radius: var(--radius-md);
+  padding: 1.5rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+  color: var(--steam-text-light);
+}
+
+.cart-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.cart-modal-header h3 {
+  color: var(--steam-text-white);
+  font-size: 1.2rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-close-modal {
+  font-size: 1.5rem;
+  color: var(--steam-text-muted);
+  line-height: 1;
+  transition: color var(--transition-fast);
+}
+
+.btn-close-modal:hover {
+  color: var(--steam-text-white);
+}
+
+.cart-items-list {
+  max-height: 320px;
+  overflow-y: auto;
+  margin-bottom: 1.25rem;
+}
+
+.cart-item-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.cart-item-thumb {
+  width: 70px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: var(--radius-xs);
+}
+
+.cart-item-info {
+  flex-grow: 1;
+}
+
+.cart-item-info h4 {
+  color: var(--steam-text-white);
+  font-size: 0.85rem;
+  margin-bottom: 0.2rem;
+}
+
+.cart-item-price {
+  color: var(--steam-green-purchase);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.btn-remove-item {
+  color: #8f98a0;
+  padding: 0.4rem;
+  transition: color var(--transition-fast);
+}
+
+.btn-remove-item:hover {
+  color: #ff4757;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem 0;
+  color: var(--steam-text-muted);
+  font-size: 0.9rem;
+}
+
+.cart-modal-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: 1rem;
+}
+
+.cart-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--steam-text-light);
+  margin-bottom: 1rem;
+}
+
+.cart-total-row .total-price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: var(--steam-text-white);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* --------------------------------------------------------------------------
+   13. RESPONSIVE DESIGN (MEDIA QUERIES)
+   -------------------------------------------------------------------------- */
+/* Large Tablet & Small Laptop (max-width: 1024px) */
+@media (max-width: 1024px) {
+  .hero-slide {
+    grid-template-columns: 1.2fr 1fr;
+  }
+  
+  .deals-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .games-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .categories-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .community-box {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .community-subscribe {
+    grid-column: span 2;
+  }
+
+  .footer-nav-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tablets & Mobile Devices (max-width: 768px) */
+@media (max-width: 768px) {
+  .primary-nav {
+    display: none; /* Mobile navigation simplified */
+  }
+
+  .store-subnav .subnav-inner {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-form {
+    width: 100%;
+  }
+
+  .hero-slide {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-media {
+    height: 240px;
+  }
+
+  .hero-media-overlay {
+    background: linear-gradient(0deg, var(--steam-card-bg) 0%, transparent 100%);
+  }
+
+  .hero-info {
+    padding: 1.25rem;
+  }
+
+  .slider-controls {
+    bottom: auto;
+    top: 1rem;
+    left: 1rem;
+  }
+
+  .deals-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .games-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .deck-card {
+    grid-template-columns: 1fr;
+  }
+
+  .deck-info {
+    padding: 1.5rem;
+  }
+
+  .deck-media {
+    height: 220px;
+    min-height: auto;
+  }
+
+  .deck-specs {
+    grid-template-columns: 1fr;
+  }
+
+  .community-box {
+    grid-template-columns: 1fr;
+    padding: 1.5rem;
+  }
+
+  .community-subscribe {
+    grid-column: span 1;
+  }
+
+  .subscribe-form {
+    flex-direction: column;
+  }
+
+  .footer-top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-nav-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .cursor-glow {
+    display: none; /* Disable glow follower on touch devices */
+  }
+}
+
+/* Small Mobile (max-width: 480px) */
+@media (max-width: 480px) {
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  .hero-game-title {
+    font-size: 1.4rem;
+  }
+
+  .hero-action-box {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .hero-btn-group {
+    flex-direction: column;
+  }
+
+  .categories-grid {
+    grid-template-columns: 1fr;
+  }
+}
